@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import space.quinoaa.minechef.client.init.ClientInit;
 import space.quinoaa.minechef.client.init.ScreenInit;
 import space.quinoaa.minechef.init.MinechefInit;
+import space.quinoaa.minechef.init.MinechefRecipesInit;
 
 
 @Mod(Minechef.MODID)
@@ -23,6 +24,7 @@ public class Minechef {
 
 
         modEventBus.addListener(ClientInit::init);
+        modEventBus.addListener(MinechefRecipesInit::initRecipe);
 
         MinechefInit.init();
     }

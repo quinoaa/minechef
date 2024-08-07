@@ -17,7 +17,7 @@ public class WorkerData {
     @Nullable
     public BaseWorkerEntity entity = null;
     @Nullable
-    private Vec3 lastPos = null;
+    public Vec3 lastPos = null;
     public boolean discarded = false;
 
     public int skinId = (int) (Math.random() * Integer.MAX_VALUE);
@@ -60,16 +60,22 @@ public class WorkerData {
         if(restaurant.level == null) return;
 
         if(entity == null || entity.isRemoved()){
-            var pos = restaurant.blocks.getFirstBlock(MinechefBlocks.RESTAURANT_PORTAL.get(), null);
+            var pos = lastPos;
+            if(pos == null){
+                var bp = restaurant.blocks.getFirstBlock(MinechefBlocks.RESTAURANT_PORTAL.get(), null);
+                if(bp != null) pos = bp.above().getCenter();
+            }
             if(pos == null) return;
             entity = switch (type){
                 case COOK -> new CookWorker(restaurant.level, restaurant.position, this);
                 case CASHIER -> new CashierWorker(restaurant.level, restaurant.position, this);
             };
-            entity.setPos(pos.above().getCenter());
+            entity.setPos(pos);
             restaurant.level.addFreshEntity(entity);
         }
     }
+
+
 
     public enum Type{
         CASHIER(Component.translatable("minechef.worker.type.cashier"), 1000),

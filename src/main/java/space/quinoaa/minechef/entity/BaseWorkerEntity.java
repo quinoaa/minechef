@@ -1,6 +1,7 @@
 package space.quinoaa.minechef.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -36,10 +37,12 @@ public abstract class BaseWorkerEntity extends Mob {
     public void tick() {
         super.tick();
 
-        if(level().isClientSide) return;
+        if(level().isClientSide || dead || data == null) return;
         updateCooldown--;
         if(updateCooldown >0) return;
         updateCooldown = 10;
+
+        data.lastPos = position();
 
         var restaurant = getRestaurant();
         if(restaurant == null) {
@@ -48,6 +51,12 @@ public abstract class BaseWorkerEntity extends Mob {
         }
 
         serverTick(restaurant);
+    }
+
+    @Override
+    public void die(DamageSource pDamageSource) {
+        super.die(pDamageSource);
+        if(data != null) data.lastPos = null;
     }
 
     public @Nullable Restaurant getRestaurant(){

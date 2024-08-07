@@ -12,6 +12,17 @@
   "minechef.screen.cash-register.title": "Cash Register",
   "minechef.screen.cash-register.no-client": "No client",
   "minechef.worker.type.cashier": "Cashier",
-  "minechef.worker.type.cook": "Cook"
+  "minechef.worker.type.cook": "Cook",
 
+  "entity.minechef.client": "Client",
+  "entity.minechef.cashier": "Cashier",
+  "entity.minechef.cook": "Cook",
+
+  "block.minechef.restaurant_board": "Restaurant Board",
+  "block.minechef.cash_register": "Cash Register",
+  "block.minechef.restaurant_portal": "Restaurant Portal",
+  "block.minechef.cooker": "Cooker",
+  "block.minechef.food_workbench": "Food Workbench",
+  "block.minechef.plate": "Plate",
+  "block.minechef.fridge": "Fridge"
 }
