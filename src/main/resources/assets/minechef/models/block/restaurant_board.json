@@ -1,0 +1,69 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "minechef:block/restaurant_board",
+		"particle": "minechef:block/restaurant_board"
+	},
+	"elements": [
+		{
+			"from": [0, 1, 3],
+			"to": [16, 13, 4],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [0, 1, 4]},
+			"faces": {
+				"north": {"uv": [0, 0, 4, 3], "texture": "#0"},
+				"east": {"uv": [0, 7, 0.5, 10], "texture": "#0"},
+				"south": {"uv": [0, 3, 4, 6], "texture": "#0"},
+				"west": {"uv": [0.5, 7, 1, 10], "texture": "#0"},
+				"up": {"uv": [4, 6.5, 0, 6], "texture": "#0"},
+				"down": {"uv": [8, 6, 4, 6.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0, 0, 4],
+			"to": [16, 1, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 5]},
+			"faces": {
+				"north": {"uv": [0, 6.5, 4, 7], "texture": "#0"},
+				"east": {"uv": [1, 7, 4, 7.5], "texture": "#0"},
+				"south": {"uv": [4, 6.5, 8, 7], "texture": "#0"},
+				"west": {"uv": [4, 7, 7, 7.5], "texture": "#0"},
+				"up": {"uv": [8, 3, 4, 0], "texture": "#0"},
+				"down": {"uv": [8, 3, 4, 6], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 2.5, 0],
+			"scale": [0.33008, 0.33008, 0.33008]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 2.5, 0],
+			"scale": [0.33008, 0.33008, 0.33008]
+		},
+		"firstperson_righthand": {
+			"rotation": [20, -48, 0],
+			"translation": [4.75, 1.5, -3.25]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-2, -66, 0],
+			"translation": [13.25, 1.5, -11.25]
+		},
+		"ground": {
+			"translation": [0, 4, 0]
+		},
+		"gui": {
+			"rotation": [41, -28, 0],
+			"translation": [0, 0.75, 0],
+			"scale": [0.5957, 0.5957, 0.5957]
+		},
+		"head": {
+			"translation": [0, 1.5, -3.25]
+		},
+		"fixed": {
+			"rotation": [0, 180, 0],
+			"translation": [0, 0, -7.5]
+		}
+	}
+}

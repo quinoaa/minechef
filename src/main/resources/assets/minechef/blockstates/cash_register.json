@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "minechef:block/cash_register",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "minechef:block/cash_register",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "minechef:block/cash_register"
+    },
+    "facing=west": {
+      "model": "minechef:block/cash_register",
+      "y": 90
+    }
+  }
+}

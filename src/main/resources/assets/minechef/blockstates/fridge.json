@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "minechef:block/fridge",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "minechef:block/fridge",
+      "y": 0
+    },
+    "facing=south": {
+      "model": "minechef:block/fridge",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "minechef:block/fridge",
+      "y": 270
+    }
+  }
+}

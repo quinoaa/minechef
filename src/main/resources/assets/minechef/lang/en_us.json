@@ -1,0 +1,17 @@
+{
+  "minechef.tab.title": "MineChef",
+  "minechef.screen.board.title": "Restaurant Board",
+  "minechef.screen.board.fund.convert": "Withdraw %s (%d$/item)",
+  "minechef.screen.board.tab.overview": "Overview",
+  "minechef.screen.board.tab.workers": "Workers",
+  "minechef.screen.board.tab.menu": "Menu",
+  "minechef.screen.common.next": "Next",
+  "minechef.chat.no_selected_restaurant": "No restaurant selected: can't place block",
+  "minechef.chat.to_far_away": "Restaurant board is too far away",
+  "minechef.screen.board.select": "Select",
+  "minechef.screen.cash-register.title": "Cash Register",
+  "minechef.screen.cash-register.no-client": "No client",
+  "minechef.worker.type.cashier": "Cashier",
+  "minechef.worker.type.cook": "Cook"
+
+}

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "space.quinoaa.minechef.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "minechef.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
