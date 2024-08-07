@@ -81,6 +81,7 @@ public class CashierWorker extends BaseWorkerEntity{
                                 item.shrink(1);
                                 setItemInHand(InteractionHand.MAIN_HAND, register.currentRequest.copyWithCount(1));
                                 request = null;
+                                break;
                             }
                         }
                     }

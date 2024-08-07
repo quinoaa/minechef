@@ -32,7 +32,7 @@ public class ClientManager {
     public void tick() {
         cooldown--;
         if(cooldown > 0) return;
-        cooldown = (int) (10 + Math.random() * 20 * 2);
+        cooldown = (int) (10 + Math.random() * 20 * 2) / Math.max(restaurant.blocks.countBlocks(MinechefBlocks.CASH_REGISTER.get()), 1);
 
         if(!shouldAcceptClient()) return;
         if(restaurant.position == null) return;
