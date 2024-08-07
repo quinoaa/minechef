@@ -45,7 +45,6 @@ public class CashRegisterEntity extends BaseRestaurantBlockEntity {
     private Set<ServerPlayer> tracking = new HashSet<>();
     public void setCurrentRequest(@Nullable ItemStack item){
         currentRequest = item;
-        if(getRestaurant().foodQueue.size() < 1000 && item != null) getRestaurant().foodQueue.add(item.copy());
 
         tracking.removeIf(plr->!(plr.containerMenu instanceof CashRegisterMenu));
 

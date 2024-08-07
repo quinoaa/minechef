@@ -11,6 +11,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
+import space.quinoaa.minechef.Minechef;
 import space.quinoaa.minechef.init.MinechefBlocks;
 import space.quinoaa.minechef.init.MinechefEntity;
 import space.quinoaa.minechef.restaurant.Restaurant;
@@ -45,8 +46,12 @@ public class CookWorker extends BaseWorkerEntity {
             return;
         }
         var food = restaurant.foodQueue.remove(0);
-        var recipe = getRecipe(food);
-        if(recipe == null) return;
+        var recipe = getRecipe(food.item);
+        if(recipe == null) {
+            Minechef.LOG.info("Could not find recipe for " + food);
+            food.finished = true;
+            return;
+        }
 
         List<ItemStack> ingredients = new ArrayList<>();
         for (Ingredient ingredient : recipe.getIngredients()) {
@@ -61,7 +66,7 @@ public class CookWorker extends BaseWorkerEntity {
             });
         }
 
-        var result = food.copyWithCount(1);
+        var result = food.item.copyWithCount(1);
         actions.add(()->{
             var rest = getRestaurant();
             if(rest == null) return true;
@@ -96,6 +101,7 @@ public class CookWorker extends BaseWorkerEntity {
                     if(container.getItem(i).isEmpty()){
                         container.setItem(i, result);
                         setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+                        food.finished = true;
                         return false;
                     }
                 }

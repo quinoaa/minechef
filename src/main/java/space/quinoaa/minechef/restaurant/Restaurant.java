@@ -25,7 +25,7 @@ public class Restaurant {
     public BlockPos position = null;
     public Set<QueuedUpdate> queuedTrackingUpdate = new HashSet<>();
 
-    public List<ItemStack> foodQueue = new ArrayList<>();
+    public List<FoodRequest> foodQueue = new ArrayList<>();
 
     public Restaurant(Level level) {
         this.level = level;

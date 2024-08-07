@@ -7,10 +7,12 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
+import space.quinoaa.minechef.Minechef;
 import space.quinoaa.minechef.block.entity.CashRegisterEntity;
 import space.quinoaa.minechef.block.entity.PlateBlockEntity;
 import space.quinoaa.minechef.init.MinechefBlocks;
 import space.quinoaa.minechef.init.MinechefEntity;
+import space.quinoaa.minechef.restaurant.FoodRequest;
 import space.quinoaa.minechef.restaurant.Restaurant;
 import space.quinoaa.minechef.restaurant.worker.WorkerData;
 
@@ -25,7 +27,7 @@ public class CashierWorker extends BaseWorkerEntity{
     }
 
     public BlockPos registerPos;
-
+    private FoodRequest request;
 
     @Override
     public void serverTick(Restaurant restaurant) {
@@ -50,28 +52,35 @@ public class CashierWorker extends BaseWorkerEntity{
                 }
             }else{
                 var pos = restaurant.blocks.getFirstBlock(MinechefBlocks.PLATE.get(), ((level, blockPos) -> {
-                    if(level.getBlockEntity(blockPos) instanceof PlateBlockEntity entity){
+                    if(level.getBlockEntity(blockPos) instanceof Container entity){
                         return containerHasRequired(register.currentRequest, entity);
                     }
                     return false;
                 }));
                 if(pos == null){
                     pos = restaurant.blocks.getFirstBlock(MinechefBlocks.FRIDGE.get(), ((level, blockPos) -> {
-                        if(level.getBlockEntity(blockPos) instanceof PlateBlockEntity entity){
+                        if(level.getBlockEntity(blockPos) instanceof Container entity){
                             return containerHasRequired(register.currentRequest, entity);
                         }
                         return false;
                     }));
                 }
 
-                if(pos == null) return;
+                if(pos == null) {
+                    if(request == null || !request.isStillValid()){
+                        request = new FoodRequest(register.currentRequest.copyWithCount(1));
+                        restaurant.foodQueue.add(request);
+                    }
+                    return;
+                }
                 if(handleMove(pos)){
                     if(level().getBlockEntity(pos) instanceof Container entity){
                         for (int i = 0; i < entity.getContainerSize(); i++) {
                             var item = entity.getItem(i);
-                            if(ItemStack.isSameItemSameTags(item, register.currentRequest)){
+                            if(ItemStack.isSameItem(item, register.currentRequest)){
                                 item.shrink(1);
                                 setItemInHand(InteractionHand.MAIN_HAND, register.currentRequest.copyWithCount(1));
+                                request = null;
                             }
                         }
                     }
@@ -83,7 +92,12 @@ public class CashierWorker extends BaseWorkerEntity{
 
 
     private boolean containerHasRequired(ItemStack req, Container container){
-        return container.hasAnyMatching(is->ItemStack.isSameItemSameTags(is, req));
+        for (int i = 0; i < container.getContainerSize(); i++) {
+            var is = container.getItem(i);
+
+            if(ItemStack.isSameItem(is, req)) return true;
+        }
+        return false;
     }
 
     private @Nullable CashRegisterEntity getCashRegister(){
