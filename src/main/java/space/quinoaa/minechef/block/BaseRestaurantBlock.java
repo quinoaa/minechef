@@ -3,6 +3,7 @@ package space.quinoaa.minechef.block;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.BlockItem;
@@ -45,11 +46,13 @@ public abstract class BaseRestaurantBlock extends BaseEntityBlock {
 
                     if(restaurantPos == null || !(lvl.getBlockEntity(restaurantPos) instanceof RestaurantBoardEntity cast)){
                         srvPlr.sendSystemMessage(Component.translatable("minechef.chat.no_selected_restaurant").withStyle(ChatFormatting.RED));
+                        srvPlr.inventoryMenu.sendAllDataToRemote();
                         return false;
                     }
 
                     if(restaurantPos.distSqr(ctx.getClickedPos()) > MAX_DISTANCE * MAX_DISTANCE){
                         srvPlr.sendSystemMessage(Component.translatable("minechef.chat.to_far_away").withStyle(ChatFormatting.RED));
+                        srvPlr.inventoryMenu.sendAllDataToRemote();
                         return false;
                     }
                     var result = super.placeBlock(ctx, state);
